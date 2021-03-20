@@ -6,7 +6,15 @@ This file creates your application.
 """
 
 from app import app
+from flask.helpers import send_from_directory
+from flask import render_template, request, redirect, url_for, flash, session, abort
+import os
+from app.models import UserProp
+from werkzeug.utils import secure_filename
+from app import app, db
+from app.forms import PropertyForm
 from flask import render_template, request, redirect, url_for
+
 
 
 ###
@@ -44,6 +52,45 @@ def send_text_file(file_name):
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
 
+@app.route('/property',methods=['POST','GET'])
+def property():
+    form=PropertyForm()
+    if request.method=='POST' and form.validate_on_submit():
+        title=form.title.data
+        bedroom_num=form.bedroom_num.data
+        bathroom_num=form.bathroom_num.data
+        location=form.location.data
+        price=form.price.data
+        types=form.types.data
+        description=form.description.data
+
+        photo=form.photo.data
+        filename=secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # property= UserProp(title,bedroom_num,bathroom_num,location,price,types,description,filename)
+        # db.session.add(property)
+        # db.session.commit()
+
+        flash('Property Added Successfully', 'success')
+        return redirect(url_for('properties'))
+    
+    return render_template('property.html', form=form)
+
+@app.route('/upload/<filename>')
+def myimage(filename):
+    root_dir=os.getcwd()
+    return send_from_directory(os.path.joim(root_dir,app.config['UPLOAD_FOLDER']))
+
+@app.route('/properties')
+def properties():
+    # properties= UserProp.query.all()
+    return render_template('properties.html',prop=prop)
+
+@app.route('/property/<propertyid>')
+def propertyid(propertyid):
+    propertyid=UserProp.query.get(propertyid)
+    return render_template('propertyid.html', propertyid=propertyid)
 
 @app.after_request
 def add_header(response):
