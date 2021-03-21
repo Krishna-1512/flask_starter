@@ -6,16 +6,16 @@
 
 {% include 'flash_messages.html' %}
         <div class="card">
-            <img class="images" src="{{ url_for('myimage',filename=property.filename)}}">
+            <img class="images" src="{{ url_for('myimage',filename=property.photo)}}">
             <div class="c-body">
                 <h5>{{property.title}}</h5>
-                <span class ="price">{{propertyid.price}}</span>
-                <span class="types">{{propertyid.types}}</span>
+                <span class ="price">{{property.price}}</span>
+                <span class="types">{{property.types}}</span>
 
-                <p>{{propertyid.desc}}</p>
-                <span>{{propertyid.bedroom_num}} Bedrooms</span>
-                <span>{{propertyid.bathroom_num}} Bathrooms</span>
-                <p>{{propertyid.;ocation}}</p>
+                <p>{{property.desc}}</p>
+                <span>{{property.bedroom_num}} Bedrooms</span>
+                <span>{{property.bathroom_num}} Bathrooms</span>
+                <p>{{property.location}}</p>
                 <button type="button" class="btn btn-info">Email Realtor</button>
             </div>
         </div>

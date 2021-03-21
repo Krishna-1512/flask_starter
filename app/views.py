@@ -64,13 +64,15 @@ def property():
         types=form.types.data
         description=form.description.data
 
-        photo=form.photo.data
+        photo=request.files['photo']
         filename=secure_filename(photo.filename)
         photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        # property= UserProp(title,bedroom_num,bathroom_num,location,price,types,description,filename)
-        # db.session.add(property)
-        # db.session.commit()
+         
+
+        propert= UserProp(title, bedroom_num, bathroom_num, location,price,types,description,filename)
+        db.session.add(propert)
+        db.session.commit()
 
         flash('Property Added Successfully', 'success')
         return redirect(url_for('properties'))
@@ -80,17 +82,17 @@ def property():
 @app.route('/upload/<filename>')
 def myimage(filename):
     root_dir=os.getcwd()
-    return send_from_directory(os.path.joim(root_dir,app.config['UPLOAD_FOLDER']))
+    return send_from_directory(os.path.join(root_dir,app.config['UPLOAD_FOLDER']),filename)
 
 @app.route('/properties')
 def properties():
-    # properties= UserProp.query.all()
+    prop= UserProp.query.all()
     return render_template('properties.html',prop=prop)
 
 @app.route('/property/<propertyid>')
 def propertyid(propertyid):
     propertyid=UserProp.query.get(propertyid)
-    return render_template('propertyid.html', propertyid=propertyid)
+    return render_template('propertyid.html', property=propertyid)
 
 @app.after_request
 def add_header(response):

@@ -7,12 +7,12 @@
 {% include 'flash_messages.html' %}
     {% for property in prop %}
         <div class="card">
-            <img class="images" src="{{ url_for('myimage',filename=property.filename)}}">
+            <img class="images" src="{{ url_for('myimage',filename=property.photo)}}">
             <div class="c-body">
                 <h5>{{property.title}}</h5>
                 <p>{{property.location}}</p>
                 <p>{{property.price}}</p>
-                <a href="{{ url_for('propertyid', property.id)}}" class="btn btn-primary">View Property</a>
+                <a href="{{ url_for('propertyid', propertyid=property.id)}}" class="btn btn-primary">View Property</a>
             </div>
         </div>
     {% endfor %}
