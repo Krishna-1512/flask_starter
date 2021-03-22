@@ -9,15 +9,15 @@ class UserProp(db.Model):
     location = db.Column(db.String(255))
     price = db.Column(db.String(80))
     types = db.Column(db.String(80))
-    desciption = db.Column(db.String(80))
+    description = db.Column(db.String(80))
     photo= db.Column(db.String(500))
 
-    def __init__(self, title, bedroom_num, bathroom_num, location,price,types,desciption,photo):
+    def __init__(self, title, bedroom_num, bathroom_num, location,price,types,description,photo):
         self.title = title
         self.bedroom_num=bedroom_num
         self.bathroom_num=bathroom_num
         self.location=location
         self.price=price
         self.types=types
-        self.desciption=desciption
+        self.description=description
         self.photo=photo

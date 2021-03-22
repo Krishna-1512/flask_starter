@@ -62,7 +62,7 @@ def property():
         location=form.location.data
         price=form.price.data
         types=form.types.data
-        desciption=form.desciption.data
+        description=form.description.data
 
         photo=request.files['photo']
         filename=secure_filename(photo.filename)
@@ -70,7 +70,7 @@ def property():
 
          
 
-        propert= UserProp(title, bedroom_num, bathroom_num, location,price,types,desciption,filename)
+        propert= UserProp(title, bedroom_num, bathroom_num, location,price,types,description,filename)
         db.session.add(propert)
         db.session.commit()
 
