@@ -1,3 +1,42 @@
 body {
     padding-top: 50px;
 }
+
+.card{
+    width:20rem;
+    margin:8px;
+    padding: 20px;
+    /* display:grid;
+    grid-gap:5px;
+    grid-template-columns: 10px 10px 10px; */
+}
+.images{
+    display:grid;
+    grid-gap:20px;
+    grid-template-columns: auto auto auto;
+}
+
+.price{
+    background-color: #2e92fd;
+    border-radius:10%;
+    color:white;
+    max-width: max-content;
+}
+.type{
+    background-color: #e1ad01 ;
+    border-radius:10%;
+    color:white;
+}
+
+a{
+    width:100%;
+}
+
+
+nav{
+    background-color:  teal;
+}
+
+.greytext{
+    color:grey;
+}
